@@ -1,0 +1,6 @@
+[submodule "services/asset-shelf"]
+	path = services/asset-shelf
+	url = https://github.com/imdizmo/asset-shelf
+[submodule "services/questlog"]
+	path = services/questlog
+	url = https://github.com/imdizmo/questlog
