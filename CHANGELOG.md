@@ -2,6 +2,12 @@
 
 Each release names the version of each service it contains. A release's notes on GitHub are its section below.
 
+## [0.1.1] - 2026-11-18
+
+- **The library service, ShelfServer 0.6.1:** in the Docker image it no longer watches every folder under `/` before
+  it starts. With a large shared library (on a network mount especially), 0.6.0 could take minutes to start, or never
+  answer, and came close to its memory limit. Questlog's server stays at 0.3.0.
+
 ## [0.1.0] - 2026-11-18
 
 The first team server: one thing to install for a team that works together with the Jatify tools.
