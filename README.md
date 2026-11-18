@@ -37,11 +37,11 @@ Each release has a `compose.yaml` pinned to its images: `ghcr.io/imdizmo/questlo
    TEAM_NAME=team
    ```
 
-2. **Data folders,** owned by the services' users (Questlog runs as 1000, the library service as 1654):
+2. **Data folders,** owned by the services' users (Questlog runs as 10001, the library service as 1654):
 
    ```sh
    mkdir -p data/questlog data/shelf data/team
-   sudo chown 1000:1000 data/questlog data/team && sudo chown 1654:1654 data/shelf
+   sudo chown 10001:10001 data/questlog data/team && sudo chown 1654:1654 data/shelf
    ```
 
 3. **Start it:**
@@ -64,6 +64,28 @@ data stays in `data/`. Questlog backs up its database before upgrading it.
 
 **Why `TS_USERSPACE: "false"`:** in Tailscale's userspace mode every caller would arrive from 127.0.0.1, and the
 services would recognise nobody.
+
+### A machine that already runs Tailscale
+
+On a NAS or home server that is already on your tailnet, use the release's `compose-host-tailscale.yaml` instead
+(rename it to `compose.yaml`). It has no Tailscale container and needs no auth key: both services use the machine's
+network and its own tailscaled, so the server keeps the machine's tailnet address and names, and anything already
+pointing at them (tools, a game repo's `.lfsconfig`) keeps working. Its `.env`:
+
+```
+TEAM_ADDRESS=100.x.y.z         # the machine's tailnet address: the services listen only there
+TEAM_NAME=my-nas               # its tailnet name
+TAILNET=your-tailnet.ts.net
+RUN_AS=1000:1000               # the user that owns the data folders (both services run as it)
+# where the data is, if not ./data/...:
+# QUESTLOG_DATA=/path/questlog-data   SHELF_DATA=/path/shelf-data   TEAM_DIR=/path/team
+# QUESTLOG_MEMORY=768m  QUESTLOG_HEAP_MB=512  SHELF_MEMORY=512m   (enough on a 2 GB machine)
+```
+
+`/var/run/tailscale` is mounted read only, so the services can ask tailscaled who is calling. To share an Asset Shelf
+library, uncomment its lines in the shelf service and set `LIBRARY`. Moving from a scripted install: stop it, copy
+its data folders, point the variables above at them (Questlog's `secret.key` must come along, or everyone is signed
+out), and `docker compose up -d`.
 
 ## Building a release
 
