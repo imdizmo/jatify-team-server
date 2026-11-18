@@ -82,6 +82,10 @@ RUN_AS=1000:1000               # the user that owns the data folders (both servi
 # QUESTLOG_MEMORY=768m  QUESTLOG_HEAP_MB=512  SHELF_MEMORY=512m   (enough on a 2 GB machine)
 ```
 
+**Tag the machine first** (in the admin console, Machines > Edit ACL tags, e.g. `tag:server`). With the host's
+network, a program running on the machine itself reaches the services from the machine's own address. The services
+treat a tagged device as nobody, but on an untagged machine every local program would count as the machine's owner.
+
 `/var/run/tailscale` is mounted read only, so the services can ask tailscaled who is calling. To share an Asset Shelf
 library, uncomment its lines in the shelf service and set `LIBRARY`. Moving from a scripted install: stop it, copy
 its data folders, point the variables above at them (Questlog's `secret.key` must come along, or everyone is signed

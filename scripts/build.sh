@@ -3,7 +3,7 @@
 # Leaves <out>/jatify-team-server-<version>-<rid>/ (shelf/, questlog/, services.json, README.md, LICENSE) and its
 # archive (.tar.gz, or .zip for Windows). Needs the .NET 10 SDK, Node and pnpm, and the submodules checked out.
 set -euo pipefail
-rid="${1:?rid: linux-x64, linux-arm64 or win-x64}"; out="${2:-dist}"
+rid="${1:?rid: linux-x64, linux-arm64 or win-x64}"; out="${2:-dist}"; mkdir -p "$out"; out="$(cd "$out" && pwd)"
 root="$(cd "$(dirname "$0")/.." && pwd)"
 v="$(cat "$root/VERSION")"
 name="jatify-team-server-$v-$rid"
@@ -20,7 +20,7 @@ shelf_v="$(sed -n 's:.*<Version>\(.*\)</Version>.*:\1:p' "$shelf/ShelfServer.csp
 questlog_v="$(node -p "require('$root/services/questlog/package.json').version")"
 if [[ "${SKIP_QUESTLOG:-}" != 1 ]]; then
     tmp="$out/.questlog-$rid"; rm -rf "${tmp:?}"; mkdir -p "$tmp"
-    (cd "$root/services/questlog" && pnpm install --frozen-lockfile && pnpm build && scripts/package-server.sh --dir "$tmp" "$rid")
+    (cd "$root/services/questlog" && pnpm install --frozen-lockfile && pnpm build && scripts/package-server.sh --dir --version-from-package "$tmp" "$rid")
     mv "$tmp/questlog-server-$rid" "$stage/questlog"; rm -rf "${tmp:?}"
 fi
 

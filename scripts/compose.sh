@@ -10,6 +10,9 @@ if (( host )); then cat <<YAML
 # network and its tailscaled, so the server keeps the machine's own tailnet address and names.
 # Put TEAM_ADDRESS, TEAM_NAME and TAILNET (and the folders, if you change them) in a .env file next to this one; see
 # "A machine that already runs Tailscale" in README.md.
+# The machine must be a tagged device (Tailscale admin console: Edit ACL tags, e.g. tag:server). On the host's network a
+# program on the machine itself calls from the machine's own address; the services treat a tagged device as nobody,
+# but on an untagged machine it would count as the machine's owner.
 services:
   questlog:
     image: ghcr.io/imdizmo/questlog-server:$questlog
