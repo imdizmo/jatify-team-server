@@ -2,7 +2,7 @@
 
 Each release names the version of each service it contains. A release's notes on GitHub are its section below.
 
-## [0.1.0] - not released yet
+## [0.1.0] - 2026-11-18
 
 The first team server: one thing to install for a team that works together with the Jatify tools.
 
