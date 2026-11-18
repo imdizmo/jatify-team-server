@@ -48,7 +48,7 @@ services:
     depends_on: [tailscale]
     environment:
       JATIFY_TEAM_SERVER: "$v"
-    command: ["--listen", "tailscale:8781", "--store", "/data", "--team", "/team/team.json"]
+    command: ["--listen", "tailscale:8781", "--store", "/data", "--team", "/team/team.json", "--projects", "/data/projects.json"]
     # to share an Asset Shelf library, add: , "--library", "/library"  and the volume below
     volumes:
       - tailscale-socket:/var/run/tailscale:ro

@@ -22,7 +22,7 @@ cat <<JSON
     },
     {
       "service": "shelf", "version": "$shelf", "port": 8781,
-      "run": ["shelf/bin/ShelfServer$exe", "--listen", "{listen}:8781", "--store", "{data}/shelf", "--team", "{data}/team/team.json"],
+      "run": ["shelf/bin/ShelfServer$exe", "--listen", "{listen}:8781", "--store", "{data}/shelf", "--team", "{data}/team/team.json", "--projects", "{data}/shelf/projects.json"],
       "env": { "JATIFY_TEAM_SERVER": "$v", "DOTNET_GCHeapHardLimit": "0x10000000" },
       "ready": "SHELF_LISTENING", "health": "/healthz"
     }
