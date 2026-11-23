@@ -2,9 +2,12 @@
 
 Each release names the version of each service it contains. A release's notes on GitHub are its section below.
 
-## [Unreleased]
+## [0.2.0] - 2026-11-23
 
 - **Questlog's server 0.4.0** (was 0.3.0).
+- **The library service, ShelfServer 0.7.0** (was 0.6.1): team members can send written suggestions with screenshots
+  from the tools, and Questlog's page can show the library, the maps and the props (its Assets tab). For that,
+  Questlog must be opened by the server's numeric address or its full name, not a one-word name.
 
 ## [0.1.1] - 2026-11-18
 
