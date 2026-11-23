@@ -2,6 +2,10 @@
 
 Each release names the version of each service it contains. A release's notes on GitHub are its section below.
 
+## [Unreleased]
+
+- **Questlog's server 0.4.0** (was 0.3.0).
+
 ## [0.1.1] - 2026-11-18
 
 - **The library service, ShelfServer 0.6.1:** in the Docker image it no longer watches every folder under `/` before
