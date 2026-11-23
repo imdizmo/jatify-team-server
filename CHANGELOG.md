@@ -2,6 +2,11 @@
 
 Each release names the version of each service it contains. A release's notes on GitHub are its section below.
 
+## [0.2.1] - 2026-11-23
+
+- **The library service, ShelfServer 0.7.1:** a suggestion with screenshots is accepted. In 0.2.0 the server refused
+  it with "The server failed on this request"; suggestions without pictures worked. Questlog's server stays at 0.4.0.
+
 ## [0.2.0] - 2026-11-23
 
 - **Questlog's server 0.4.0** (was 0.3.0).
